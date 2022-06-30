@@ -28,13 +28,8 @@ class Device(models.Model):
         default=True,
         help_text=_("Inactive devices will not be sent notifications"),
     )
-    user = models.ForeignKey(
-        SETTINGS["USER_MODEL"],
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_query_name=_("fcmdevice"),
-    )
+    user = models.UUIDField(editable=True, null=True, db_index=True)
+
     date_created = models.DateTimeField(
         verbose_name=_("Creation date"), auto_now_add=True, null=True
     )
